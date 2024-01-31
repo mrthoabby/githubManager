@@ -22,12 +22,15 @@ def getCurrentAccountConfigurations():
 def addAnAccountConfiguration():
     return
 
+def defShowCommand(subParser):
+    showReposCommands = subParser.add_parser("show",help="Mostrar información de los tokens de cuentas registrados.")
+    showReposCommands.add_argument("-t",help="Muestra las cuentas con sus respectivos tokens.")
+
 def commandHandler():
     parser = argparse.ArgumentParser(description="Interfaz de comandos...")
     subParser = parser.add_subparsers(title="Commandos",dest="command")
 
-    showReposCommands = subParser.add_parser("show",help="Mostrar información de los tokens de cuentas registrados")
-    showReposCommands.add_argument("-t",help="Muestra las cuentas con sus respectivos tokens")
+    defShowCommand(subParser)
 
     args = parser.parse_args()
 
