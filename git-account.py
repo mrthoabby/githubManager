@@ -23,7 +23,7 @@ def addAnAccountConfiguration():
     return
 
 def commandHandler():
-    parser = argparse.ArgumentParser(description="Interfaz de comandos")
+    parser = argparse.ArgumentParser(description="Interfaz de comandos...")
     subParser = parser.add_subparsers(title="Commandos",dest="command")
 
     showReposCommands = subParser.add_parser("show",help="Mostrar información de los tokens de cuentas registrados")
