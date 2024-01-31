@@ -1,20 +1,16 @@
 #!/usr/bin/python3
-import os
-import math
+import argparse
+from itertools import count 
 
-AUTH_GITHUB_TOKEN_FORMAT = "AUTH_GITHUB_TOKEN_"
+AUTH_GITHUB_TOKEN_FORMAT = "AUTH_GITHUB_TOKEN"
 AUTH_GITHUB_USERNAME_FORMAT = "AUTH_GITHUB_USERNAME"
 GITHUB_APIURL = "https://api.github.com/user/repos"
+ACCOUNT_IDENTIFIER_NAME = "Account-"
 
-""" ENDPOINTS = {
-    "repo":{
-        "method":"post",
-        "headers":{
-            "Authorization":f"token"
-        }
-    }
-}
- """
+def getEnvsByFormat(eviromentVarsDict:dict,format:str):
+    return {"".join([ACCOUNT_IDENTIFIER_NAME,str(index)]):{
+            format:value
+            } for (key,value),index in zip(eviromentVarsDict.items(),count(1)) if key.startswith(format)}
 
 #Obtengo desde las variaboles de entorno
 #las configuraciones de cuenta guardadas
@@ -26,4 +22,24 @@ def getCurrentAccountConfigurations():
 def addAnAccountConfiguration():
     return
 
-print(getCurrentAccountConfigurations())
+def commandHandler():
+    parser = argparse.ArgumentParser(description="Interfaz de comandos")
+    subParser = parser.add_subparsers(title="Commandos",dest="command")
+
+    showReposCommands = subParser.add_parser("show",help="Mostrar información de los tokens de cuentas registrados")
+    showReposCommands.add_argument("-t",help="Muestra las cuentas con sus respectivos tokens")
+
+    args = parser.parse_args()
+
+    if hasattr(args,"command"):
+        if args.command == "show":
+            print(args.t)
+    else:
+        print("Sin comandos")
+
+
+def app():
+    commandHandler()
+
+if __name__  == "__name__":
+    app()
