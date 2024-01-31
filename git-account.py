@@ -27,7 +27,7 @@ def defShowCommand(subParser):
     showReposCommands.add_argument("-t",help="Muestra las cuentas con sus respectivos tokens.")
 
 def commandHandler():
-    parser = argparse.ArgumentParser(description="Interfaz de comandos...")
+    parser = argparse.ArgumentParser(description="Interfaz de comandos...sds")
     subParser = parser.add_subparsers(title="Commandos",dest="command")
 
     defShowCommand(subParser)
